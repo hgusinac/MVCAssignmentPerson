@@ -1,0 +1,17 @@
+﻿@model EditPerson
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+
+    <input asp-for="CreatePerson.Name" placeholder="Name"/>
+    <input asp-for="CreatePerson.City" placeholder="City"/>
+    <input asp-for="CreatePerson.Phone" placeholder="Phone"/>
+    
+
+    <button>Save</button>
+
+</form>

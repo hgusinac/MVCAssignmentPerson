@@ -1,0 +1,74 @@
+﻿
+using MVCAssignmentPerson.Models.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MVCAssignmentPerson.Models.Data
+
+{
+    public class InMemoryPeopleRepo : IPeopleRepo
+    {
+        static List<Person> PersonList = new List<Person>();
+        static int idCounter = 0;
+
+        public Person Create(CreatePersonViewModel createPerson)
+        {
+            Person newPerson = new Person
+            {
+                Id = ++idCounter,
+                Name = createPerson.Name,
+                City = createPerson.City,
+                Phone = createPerson.Phone
+
+            };
+            PersonList.Add(newPerson);
+            return newPerson;
+        }
+
+        public Person Read(int id)
+        {
+            return PersonList.SingleOrDefault(p => p.Id == id);// samma som if p.id==id
+            
+        }
+
+        public List<Person> Read()
+        {
+            return PersonList;
+        }
+
+
+        public Person Update(Person person)
+        {
+            Person OriginalPerson = Read(person.Id);
+
+            if (OriginalPerson == null)
+            {
+                return null;
+               
+            }
+
+            OriginalPerson.Name = person.Name;
+            OriginalPerson.Phone = person.Phone;
+            OriginalPerson.City = person.City;
+
+            return OriginalPerson;
+
+        }
+      
+        public bool Delete(int id)
+        {
+            Person OriginalPerson = Read(id);
+
+            if (OriginalPerson == null)
+            {
+                return false;
+
+            }
+            return PersonList.Remove(OriginalPerson);
+
+        }
+        
+    }
+}
