@@ -30,30 +30,7 @@ namespace MVCAssignmentPerson.Controllers
             return View(searchViewModel);
 
         }
-        public IActionResult Details(int id)
-        {
-            Person person = _peopleService.FindbyId(id);
-            if(person == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return View(person);
-        }
-
-        public IActionResult ClosePeopleDetails(int id)
-        {
-            return PartialView("_PeoplePartialView", _peopleService.FindbyId(id));
-        }
-
-        public IActionResult PartialDetails(int id)
-        {
-            Person person = _peopleService.FindbyId(id);
-            if (person == null)
-            {
-                return NotFound();
-            }
-            return PartialView("_PeopleDetails", person);
-        }
+       
 
 
         [HttpPost]

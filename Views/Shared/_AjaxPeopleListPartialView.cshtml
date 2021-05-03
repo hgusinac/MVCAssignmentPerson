@@ -1,4 +1,4 @@
-﻿@model PeopleViewModel
+﻿@model List<Person>
 
 <div class="row">
     <div class="col-12">
@@ -17,14 +17,14 @@
             </div>
 
             <div class="col-3">
-                <h5>Delete / Details</h5>
+                <h5> Id </h5>
             </div>
 
         </div>
 
-        @foreach (var item in Model.PeopleList)
+        @foreach (var item in Model)
         {
-            <partial name="_PersonPartialView" model="item" />
+            <partial name="_AjaxPersonPartialView" model="item" />
         }
 
     </div>

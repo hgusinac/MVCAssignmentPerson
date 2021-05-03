@@ -13,7 +13,7 @@ namespace MVCAssignmentPerson.Models.Data
         static List<Person> PersonList = new List<Person>();
         static int idCounter = 0;
 
-        
+     
 
         public Person Create(CreatePersonViewModel createPerson)
         {
@@ -28,6 +28,7 @@ namespace MVCAssignmentPerson.Models.Data
             PersonList.Add(newPerson);
             return newPerson;
         }
+
 
         public Person Read(int id)
         {
