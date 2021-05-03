@@ -18,9 +18,15 @@ namespace MVCAssignmentPerson.Models.ViewModel
         public List<Person> PeopleList { get; set; }
 
         public string SearchPerson { get; set; }
-        public CreatePersonViewModel CreatePersonViewModel { get; set; }
-        
 
-       
+
+        public CreatePersonViewModel CreatePersonViewModel { get; set; }
+
+      
+
+
+
+
+
     }
 }

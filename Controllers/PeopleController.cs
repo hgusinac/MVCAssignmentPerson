@@ -11,7 +11,7 @@ namespace MVCAssignmentPerson.Controllers
 {
     public class PeopleController : Controller
     {
-        IPeopleService _peopleService = new PeopleService();
+        readonly IPeopleService _peopleService = new PeopleService();
 
 
         [HttpGet]
@@ -19,6 +19,7 @@ namespace MVCAssignmentPerson.Controllers
         {
             return View(_peopleService.All());
         }
+
         [HttpPost]
         public IActionResult Index(PeopleViewModel searchViewModel)
         {
@@ -28,6 +29,30 @@ namespace MVCAssignmentPerson.Controllers
             ModelState.Clear();
             return View(searchViewModel);
 
+        }
+        public IActionResult Details(int id)
+        {
+            Person person = _peopleService.FindbyId(id);
+            if(person == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(person);
+        }
+
+        public IActionResult ClosePeopleDetails(int id)
+        {
+            return PartialView("_PeoplePartialView", _peopleService.FindbyId(id));
+        }
+
+        public IActionResult PartialDetails(int id)
+        {
+            Person person = _peopleService.FindbyId(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_PeopleDetails", person);
         }
 
 
@@ -80,10 +105,18 @@ namespace MVCAssignmentPerson.Controllers
 
 
         public IActionResult Delete(int id)
-
         {
-            _peopleService.Remove(id);
-            return RedirectToAction(nameof(Index));
+            Person person = _peopleService.FindbyId(id);
+
+            if(person == null)
+            {
+                return NotFound();
+            }
+            if (_peopleService.Remove(id))
+            {
+                return Ok("Person " + id);
+            }
+            return BadRequest();
         }
 
 

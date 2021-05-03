@@ -1,0 +1,24 @@
+﻿@model Person
+
+<div id="@("person" + Model.Id)" class="row">
+
+    <div class="col-3">
+        <h5>@Model.Name</h5>
+    </div>
+    <div class="col-3">
+        <h5>@Model.Phone</h5>
+    </div>
+    <div class="col-3">
+        <h5>@Model.City</h5>
+    </div>
+    <div class="col-3">
+        
+        <a class="btn-danger" asp-action="Delete" asp-route-id="@Model.Id" onclick="deletePerson(this,event)">Delete</a>
+
+        <a class="btn-primary" asp-action="PartialDetails" asp-route-id="@Model.Id" onclick="detailsPerson(@Model.Id, event)">Details</a>
+    </div>
+
+
+</div>
+    
+
