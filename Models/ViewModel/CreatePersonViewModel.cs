@@ -10,10 +10,11 @@ namespace MVCAssignmentPerson.Models.ViewModel
     public class CreatePersonViewModel
     {
         [Required]
-        
+        [MaxLength(60)]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(20)]
         public string Phone { get; set; }
         [Required]
         public string City { get; set; }

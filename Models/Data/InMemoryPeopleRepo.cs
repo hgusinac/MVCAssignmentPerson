@@ -10,8 +10,8 @@ namespace MVCAssignmentPerson.Models.Data
 {
     public class InMemoryPeopleRepo : IPeopleRepo
     {
-        static List<Person> PersonList = new List<Person>();
-        static int idCounter = 0;
+         List<Person> PersonList = new List<Person>();
+        int idCounter = 0;
 
      
 

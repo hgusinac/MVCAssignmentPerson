@@ -10,7 +10,11 @@ namespace MVCAssignmentPerson.Controllers
 {
     public class AjaxController : Controller
     {
-        readonly IPeopleService _peopleService = new PeopleService();
+        IPeopleService _peopleService;
+        public AjaxController(IPeopleService peopleService)
+        {
+            _peopleService = peopleService;
+        }
         public IActionResult Index()
         {
             return View();

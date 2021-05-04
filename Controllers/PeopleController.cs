@@ -11,7 +11,13 @@ namespace MVCAssignmentPerson.Controllers
 {
     public class PeopleController : Controller
     {
-        readonly IPeopleService _peopleService = new PeopleService();
+        IPeopleService _peopleService;
+
+
+        public PeopleController(IPeopleService peopleService)//Constructor injection 
+        {
+            _peopleService = peopleService;
+        }
 
 
         [HttpGet]
