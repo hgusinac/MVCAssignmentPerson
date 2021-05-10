@@ -21,7 +21,7 @@ namespace MVCAssignmentPerson.Models.Data
             {
                 Id = ++idCounter,
                 Name = createPerson.Name,
-                City = createPerson.City,
+                InCityId = createPerson.CityId,
                 Phone = createPerson.Phone
 
             };
@@ -54,7 +54,7 @@ namespace MVCAssignmentPerson.Models.Data
 
             OriginalPerson.Name = person.Name;
             OriginalPerson.Phone = person.Phone;
-            OriginalPerson.City = person.City;
+            OriginalPerson.InCityId = person.InCityId;
 
             return OriginalPerson;
 

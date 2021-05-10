@@ -11,9 +11,15 @@
     <span asp-validation-for="Name"></span>
 
 
-    <label asp-for="City"></label>
-    <input asp-for="City" />
-    <span asp-validation-for="City"></span>
+    <label asp-for="CityId"></label>
+    <select asp-for="CityId">
+        @foreach (var item in Model.CityList)
+        {
+            <option value="@item.Id">@item.CityName</option>
+        }
+
+        </select> 
+    <span asp-validation-for="CityId"></span>
 
     <label asp-for="Phone"></label>
     <input asp-for="Phone" />

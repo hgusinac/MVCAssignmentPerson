@@ -12,7 +12,10 @@ namespace MVCAssignmentPerson.Database
         public PeopleDbContext(DbContextOptions<PeopleDbContext> options) : base(options)
         { }
        
-       public DbSet<Person> people { get; set; }
+       public DbSet<Person> People { get; set; }
+       public DbSet<City> Cityis { get; set; }
+       public DbSet<Country> Countries { get; set; }
+
     }
 
         

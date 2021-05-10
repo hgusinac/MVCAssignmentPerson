@@ -4,14 +4,16 @@ using MVCAssignmentPerson.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCAssignmentPerson.Migrations
 {
     [DbContext(typeof(PeopleDbContext))]
-    partial class PeopleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507094120_AddCityandCountry")]
+    partial class AddCityandCountry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +34,14 @@ namespace MVCAssignmentPerson.Migrations
                     b.Property<int?>("CountryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("PersonInCityId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("PersonInCityId");
 
                     b.ToTable("Cityis");
                 });
@@ -61,8 +68,9 @@ namespace MVCAssignmentPerson.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("InCityId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -76,8 +84,6 @@ namespace MVCAssignmentPerson.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InCityId");
-
                     b.ToTable("People");
                 });
 
@@ -87,23 +93,15 @@ namespace MVCAssignmentPerson.Migrations
                         .WithMany("CityInCountry")
                         .HasForeignKey("CountryId");
 
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("MVCAssignmentPerson.Models.Data.Person", b =>
-                {
-                    b.HasOne("MVCAssignmentPerson.Models.Data.City", "InCity")
-                        .WithMany("PersonsInCity")
-                        .HasForeignKey("InCityId")
+                    b.HasOne("MVCAssignmentPerson.Models.Data.Person", "PersonInCity")
+                        .WithMany()
+                        .HasForeignKey("PersonInCityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("InCity");
-                });
+                    b.Navigation("Country");
 
-            modelBuilder.Entity("MVCAssignmentPerson.Models.Data.City", b =>
-                {
-                    b.Navigation("PersonsInCity");
+                    b.Navigation("PersonInCity");
                 });
 
             modelBuilder.Entity("MVCAssignmentPerson.Models.Data.Country", b =>

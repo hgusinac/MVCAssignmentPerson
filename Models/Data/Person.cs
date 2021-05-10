@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCAssignmentPerson.Models.Data
 {
@@ -18,8 +19,11 @@ namespace MVCAssignmentPerson.Models.Data
         [Required]
         [MaxLength(20)]
         public string Phone { get; set; }
-        [Required]
-        public string City { get; set; }
+        [ForeignKey("InCity")]
+        public int InCityId { get; set; }
+
+        public City InCity { get; set; }
+
 
 
 

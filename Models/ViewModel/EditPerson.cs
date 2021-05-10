@@ -17,7 +17,7 @@ namespace MVCAssignmentPerson.Models.ViewModel
         public EditPerson(int id, Person person)
         {
             Id = id;
-            this.CreatePerson = new CreatePersonViewModel() { Name = person.Name, City = person.City, Phone = person.Phone };
+            this.CreatePerson = new CreatePersonViewModel() { Name = person.Name, CityId = person.InCityId, Phone = person.Phone };
         }
 
         public EditPerson(int id, CreatePersonViewModel createPerson)

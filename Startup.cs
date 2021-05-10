@@ -27,18 +27,24 @@ namespace MVCAssignmentPerson
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //Connection to Database
             services.AddDbContext<PeopleDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));//Nr 5
 
+
+            //Services IoC
             services.AddScoped<IPeopleService, PeopleService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ICountryService, CountryService>();
+            
 
-            //services.AddSingleton<IPeopleRepo, InMemoryPeopleRepo>();
-
-           // services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();//Nr 5
+            //------Repo Ioc--------
+           
             services.AddScoped<IPeopleRepo, DatabasePeopleRepo>();//Nr 5 Ulf använder denna. 
+            services.AddScoped<ICityRepo, DbCityRepo>();
+            services.AddScoped<ICountryRepo, DbCountryRepo>();
 
-
+            
             services.AddMvc();
         }
 

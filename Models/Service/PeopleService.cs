@@ -11,10 +11,12 @@ namespace MVCAssignmentPerson.Models.Service
     public class PeopleService : IPeopleService
     {
         IPeopleRepo _peopleRepo;
+        private readonly ICityRepo _cityRepo;
 
-        public PeopleService(IPeopleRepo peopleRepo)
+        public PeopleService(IPeopleRepo peopleRepo, ICityRepo cityRepo)
         {
             _peopleRepo = peopleRepo;
+            _cityRepo = cityRepo;
         }
 
         public Person Add(CreatePersonViewModel createPerson)
@@ -29,6 +31,7 @@ namespace MVCAssignmentPerson.Models.Service
         {
             PeopleViewModel vm = new PeopleViewModel();
             vm.PeopleList = _peopleRepo.Read();
+            vm.CreatePersonViewModel.CityList = _cityRepo.Read();//Alla citys i listan. 
 
             return vm;
         }
@@ -48,7 +51,7 @@ namespace MVCAssignmentPerson.Models.Service
                 {
                     if (item.Name.Contains(filter) ||
                         
-                        item.City.Contains(filter))
+                        item.InCity.CityName.Contains(filter))
 
                     {
                         filteredList.Add(item);
@@ -81,7 +84,7 @@ namespace MVCAssignmentPerson.Models.Service
             person.Id = id;
             person.Name = createPerson.Name;
             person.Phone = createPerson.Phone;
-            person.City = createPerson.City;
+            person.InCityId = createPerson.CityId;
 
 
            return _peopleRepo.Update(person);

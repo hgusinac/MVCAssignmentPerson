@@ -9,11 +9,11 @@ namespace MVCAssignmentPerson.Database
 {
     public class DatabasePeopleRepo : IPeopleRepo
     {
-        private readonly PeopleDbContext peopleDbContext;
+        private readonly PeopleDbContext _peopleDbContext;
 
         public DatabasePeopleRepo(PeopleDbContext peopleDbContext)
         {
-            this.peopleDbContext = peopleDbContext;
+            this._peopleDbContext = peopleDbContext;
         }
 
         public Person Create(CreatePersonViewModel createPerson)
@@ -21,11 +21,11 @@ namespace MVCAssignmentPerson.Database
             Person person = new Person();// skapar en person 
 
             person.Name = createPerson.Name; // överför datan från createPerson till Person. 
-            person.City = createPerson.City;
+            person.InCityId = createPerson.CityId;
             person.Phone = createPerson.Phone;
 
-            peopleDbContext.Add(person);// lägger till person med rätt namn city phone.
-            int result = peopleDbContext.SaveChanges();//sparar ändringar. 
+            _peopleDbContext.Add(person);// lägger till person med rätt namn city phone.
+            int result = _peopleDbContext.SaveChanges();//sparar ändringar. 
 
             if (result == 0)
             {
@@ -39,12 +39,12 @@ namespace MVCAssignmentPerson.Database
        
         public Person Read(int id)
         {
-            return peopleDbContext.people.SingleOrDefault(row => row.Id == id);
+            return _peopleDbContext.People.SingleOrDefault(row => row.Id == id);
         }
 
         public List<Person> Read()
         {
-            return peopleDbContext.people.ToList();
+            return _peopleDbContext.People.ToList();
         }
         public Person Update(Person person)
         {
@@ -58,9 +58,9 @@ namespace MVCAssignmentPerson.Database
 
             OriginalPerson.Name = person.Name;
             OriginalPerson.Phone = person.Phone;
-            OriginalPerson.City = person.City;
+            OriginalPerson.InCityId = person.InCityId;
 
-            int result = peopleDbContext.SaveChanges();
+            int result = _peopleDbContext.SaveChanges();
 
             if (result == 0)
             {
@@ -83,9 +83,9 @@ namespace MVCAssignmentPerson.Database
                 return false;
             }
 
-            peopleDbContext.Remove(person);// raderar personen 
+            _peopleDbContext.Remove(person);// raderar personen 
 
-            int result = peopleDbContext.SaveChanges();// sparar förändringen
+            int result = _peopleDbContext.SaveChanges();// sparar förändringen
 
             if (result == 0)// om ingen förändring sker misslyckas raderingen.
             {

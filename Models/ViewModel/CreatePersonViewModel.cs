@@ -17,12 +17,13 @@ namespace MVCAssignmentPerson.Models.ViewModel
         [MaxLength(20)]
         public string Phone { get; set; }
         [Required]
-        public string City { get; set; }
+        public int CityId { get; set; }
 
-        
+        public List<City> CityList { get; set; }
 
-        
-        
+
+
+
 
     }
 }
