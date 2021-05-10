@@ -23,8 +23,7 @@ namespace MVCAssignmentPerson.Controllers
         }
         public IActionResult Index()
         {
-            City city = new City();
-            return View(city);
+            return View(_cityService.All());
         }
         public IActionResult Create()
         {

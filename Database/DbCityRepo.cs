@@ -37,7 +37,7 @@ namespace MVCAssignmentPerson.Database
 
         public List<City> Read()
         {
-            return _peopleDbContext.Cityis.ToList();
+            return _peopleDbContext.Cityis.Include(city => city.Country).ToList();
         }
         public City Update(City city)
         {

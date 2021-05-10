@@ -18,14 +18,15 @@ namespace MVCAssignmentPerson.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_countryService.All());
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
-            CreateCountry createCountry = new CreateCountry();
-            return View(createCountry);
+            
+            return View();
         }
+        [HttpPost]
         public IActionResult Create(CreateCountry createCountry)
         {
             if (ModelState.IsValid)
