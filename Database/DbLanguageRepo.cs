@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Models.Data
 {
-    public class LanguageRepo : ILanguageRepo
+    public class DbLanguageRepo : ILanguageRepo
 
     {
         private readonly PeopleDbContext _peopleDbContext;
 
-        public LanguageRepo(PeopleDbContext peopleDbContext)
+        public DbLanguageRepo(PeopleDbContext peopleDbContext)
         {
             _peopleDbContext = peopleDbContext;
         }

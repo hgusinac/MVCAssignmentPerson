@@ -22,17 +22,17 @@ namespace MVCAssignmentPerson.Database
                 pl.LanguageId
             });
 
+            modelBuilder.Entity<PersonLanguage>()
+           .HasOne<Person>(pl => pl.Person)
+           .WithMany(p => p.PersonLanguages)
+           .HasForeignKey(sc => sc.PersonId);
+
+
+            modelBuilder.Entity<PersonLanguage>()
+           .HasOne<Language>(pl => pl.Language)
+           .WithMany(l => l.PersonLanguages)
+           .HasForeignKey(pl => pl.LanguageId);
         }
-    // modelBuilder.Entity<StudentCourse>()
-    //.HasOne<Student>(sc => sc.Student)
-    //.WithMany(s => s.StudentCourses)
-    //.HasForeignKey(sc => sc.SId);
-
-
-    // modelBuilder.Entity<StudentCourse>()
-    //.HasOne<Course>(sc => sc.Course)
-    //.WithMany(s => s.StudentCourses)
-    //.HasForeignKey(sc => sc.CId);
 
 
 
