@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MVCAssignmentPerson.Database;
+using Microsoft.EntityFrameworkCore;
+
 namespace MVCAssignmentPerson.Database
 {
     public class DatabasePeopleRepo : IPeopleRepo
@@ -13,18 +15,22 @@ namespace MVCAssignmentPerson.Database
 
         public DatabasePeopleRepo(PeopleDbContext peopleDbContext)
         {
-            this._peopleDbContext = peopleDbContext;
+           _peopleDbContext = peopleDbContext;
         }
 
         public Person Create(CreatePersonViewModel createPerson)
         {
-            Person person = new Person();// skapar en person 
-
-            person.Name = createPerson.Name; // överför datan från createPerson till Person. 
-            person.InCityId = createPerson.CityId;
-            person.Phone = createPerson.Phone;
+            Person person = new Person();  // skapar en person 
+            {
+                person.Name = createPerson.Name; // överför datan från createPerson till Person. 
+                person.InCityId = createPerson.CityId;
+                person.Phone = createPerson.Phone;
+            }
+            
+                                      
 
             _peopleDbContext.Add(person);// lägger till person med rätt namn city phone.
+
             int result = _peopleDbContext.SaveChanges();//sparar ändringar. 
 
             if (result == 0)
@@ -37,15 +43,16 @@ namespace MVCAssignmentPerson.Database
 
 
        
+        public List<Person> Read()
+        {
+            
+            return _peopleDbContext.People.Include("InCity").ToList(); // Ändrat så att InCity följer med personen.
+        }
         public Person Read(int id)
         {
             return _peopleDbContext.People.SingleOrDefault(row => row.Id == id);
         }
 
-        public List<Person> Read()
-        {
-            return _peopleDbContext.People.ToList();
-        }
         public Person Update(Person person)
         {
             Person OriginalPerson = Read(person.Id);
