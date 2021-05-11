@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MVCAssignmentPerson.Models.Data;
 
-namespace MVCAssignmentPerson.Models.Data
+namespace MVCAssignmentPerson.Models.Repo
 {
   public  interface ILanguageRepo
     {

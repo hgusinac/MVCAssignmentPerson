@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCAssignmentPerson.Models.Data;
+using MVCAssignmentPerson.Models.Repo;
 using MVCAssignmentPerson.Models.Service;
 using MVCAssignmentPerson.Models.ViewModel;
 using System;

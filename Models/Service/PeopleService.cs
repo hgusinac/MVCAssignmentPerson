@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MVCAssignmentPerson.Models.Repo;
 
 namespace MVCAssignmentPerson.Models.Service
 {
@@ -49,9 +50,11 @@ namespace MVCAssignmentPerson.Models.Service
             {
                 foreach (Person item in _peopleRepo.Read())
                 {
+
+
                     if (item.Name.Contains(search.SearchPerson) ||
-                        
-                        item.InCity.CityName.Contains(search.SearchPerson))
+
+                        item.InCity != null && item.InCity.CityName.Contains(search.SearchPerson))
 
                     {
                         filteredList.Add(item);

@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCAssignmentPerson.Models.Data
+namespace MVCAssignmentPerson.Models.Repo
+
 {
    public interface IPeopleRepo
     {

@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MVCAssignmentPerson.Models.Repo;
 
-namespace MVCAssignmentPerson.Models.Service
+namespace MVCAssignmentPerson.Models.Repo
+
 {
     public interface ICityRepo
     {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MVCAssignmentPerson.Database;
 using Microsoft.EntityFrameworkCore;
+using MVCAssignmentPerson.Models.Repo;
 
 namespace MVCAssignmentPerson.Database
 {

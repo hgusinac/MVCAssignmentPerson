@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVCAssignmentPerson.Database;
 using MVCAssignmentPerson.Models.Data;
+using MVCAssignmentPerson.Models.Repo;
 using MVCAssignmentPerson.Models.Service;
 using System;
 using System.Collections.Generic;
