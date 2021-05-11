@@ -29,8 +29,7 @@ namespace MVCAssignmentPerson.Controllers
         [HttpPost]
         public IActionResult Index(PeopleViewModel searchViewModel)
         {
-            PeopleViewModel filteredModel = _peopleService.FindBy(searchViewModel);
-            searchViewModel.PeopleList = filteredModel.PeopleList;
+             _peopleService.FindBy(searchViewModel);
 
             ModelState.Clear();
             return View(searchViewModel);

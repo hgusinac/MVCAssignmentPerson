@@ -37,21 +37,21 @@ namespace MVCAssignmentPerson.Models.Service
         }
         public PeopleViewModel FindBy(PeopleViewModel search)
         {
-            string filter = search.SearchPerson;
-            search = this.All();
+            
             List<Person> filteredList = new List<Person>();
-
-            if (String.IsNullOrWhiteSpace(filter))
+            search.CreatePersonViewModel.CityList = _cityRepo.Read(); // sökningen inte crashar
+            if (String.IsNullOrWhiteSpace(search.SearchPerson))
             {
+                search.PeopleList = _peopleRepo.Read();
                 return search;
             }
             else
             {
-                foreach (Person item in search.PeopleList)
+                foreach (Person item in _peopleRepo.Read())
                 {
-                    if (item.Name.Contains(filter) ||
+                    if (item.Name.Contains(search.SearchPerson) ||
                         
-                        item.InCity.CityName.Contains(filter))
+                        item.InCity.CityName.Contains(search.SearchPerson))
 
                     {
                         filteredList.Add(item);

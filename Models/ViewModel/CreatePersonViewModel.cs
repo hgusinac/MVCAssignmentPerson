@@ -16,8 +16,8 @@ namespace MVCAssignmentPerson.Models.ViewModel
         [Required]
         [MaxLength(20)]
         public string Phone { get; set; }
-        [Required]
-        public int CityId { get; set; }
+       
+        public int? CityId { get; set; }
 
         public List<City> CityList { get; set; }
 
