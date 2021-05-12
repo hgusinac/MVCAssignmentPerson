@@ -38,7 +38,7 @@ namespace MVCAssignmentPerson
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<ILanguageService, LanguageService>();
-            
+            // Lägg till Service 
 
             //------Repo Ioc--------
            
@@ -46,6 +46,8 @@ namespace MVCAssignmentPerson
             services.AddScoped<ICityRepo, DbCityRepo>();
             services.AddScoped<ICountryRepo, DbCountryRepo>();
             services.AddScoped<ILanguageRepo, DbLanguageRepo>();
+            services.AddScoped<IPersonLanguageRepo, PersonLanguageRepo>();
+           
             
 
             

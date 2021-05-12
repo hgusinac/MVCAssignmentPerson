@@ -51,7 +51,9 @@ namespace MVCAssignmentPerson.Database
         }
         public Person Read(int id)
         {
-            return _peopleDbContext.People.SingleOrDefault(row => row.Id == id);
+            return _peopleDbContext.People.Include(Person => Person.PersonLanguages)
+                                          .ThenInclude(perLan => perLan.Language)
+                                          .SingleOrDefault(row => row.Id == id);
         }
 
         public Person Update(Person person)

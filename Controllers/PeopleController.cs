@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCAssignmentPerson.Models.Data;
+using MVCAssignmentPerson.Models.Repo;
 using MVCAssignmentPerson.Models.Service;
 using MVCAssignmentPerson.Models.ViewModel;
 using System;
@@ -12,11 +13,14 @@ namespace MVCAssignmentPerson.Controllers
     public class PeopleController : Controller
     {
         IPeopleService _peopleService;
+        private readonly IPersonLanguageRepo _personLanguageRepo;// Byt ut mot Service
+        private readonly ILanguageService _languageService;
 
-
-        public PeopleController(IPeopleService peopleService)//Constructor injection 
+        public PeopleController(IPeopleService peopleService, IPersonLanguageRepo personLanguageRepo , ILanguageService languageService)//Constructor injection 
         {
             _peopleService = peopleService;
+           _personLanguageRepo = personLanguageRepo;//byt ut mot Service
+            _languageService = languageService;
         }
 
 
@@ -49,6 +53,65 @@ namespace MVCAssignmentPerson.Controllers
             createPerson = _peopleService.All();
             return View("Index", createPerson);
         }
+        [HttpGet]
+        public IActionResult ManagePersonLanguages(int id)
+        {
+            Person person = _peopleService.FindbyId(id);
+
+            if (person == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            PersonLanguagesViewModel vm = new PersonLanguagesViewModel();
+            vm.Person = person;
+            vm.Languages = _languageService.All();
+
+
+            return View(vm);
+        }
+        [HttpGet]
+        public IActionResult AddLanguageToPerson(int personId, int langId)
+        {
+            Person person = _peopleService.FindbyId(personId);
+
+            if (person == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            PersonLanguage personLanguage = _personLanguageRepo.Create(// Ändra till Service
+                new PersonLanguage() { PersonId = personId, LanguageId = langId });
+
+
+
+
+
+            return RedirectToAction("ManagePersonLanguages", new { id = personId });
+
+        }
+        [HttpGet]
+        public IActionResult RemoveLanguageToPerson(int personId, int langId)
+        {
+            Person person = _peopleService.FindbyId(personId);
+
+            if (person == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+           _personLanguageRepo.Delete(personId,langId );
+
+
+
+            return RedirectToAction("ManagePersonLanguages", new { id = personId });
+
+        }
+
+
         [HttpGet]
         public IActionResult Edit(int id)
         {

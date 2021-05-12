@@ -54,7 +54,7 @@ namespace MVCAssignmentPerson.Models.Service
 
                     if (item.Name.Contains(search.SearchPerson) ||
 
-                        item.InCity != null && item.InCity.CityName.Contains(search.SearchPerson))
+                        item.InCity != null && item.InCity.CityName.Contains(search.SearchPerson)) // null check. item.Incity !=null 
 
                     {
                         filteredList.Add(item);
