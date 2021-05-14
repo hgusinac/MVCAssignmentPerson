@@ -11,9 +11,11 @@ namespace MVCAssignmentPerson.Models.Repo
 
     {
         PersonLanguage Create(PersonLanguage personLanguage);
+        List<PersonLanguage> Read();
 
         PersonLanguage Read(int personId, int langId);
-        List<PersonLanguage> Read();
+
+        List<PersonLanguage> Read(int id);
 
         bool Delete(int personId, int langId);
     }

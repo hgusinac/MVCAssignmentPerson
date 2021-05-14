@@ -13,14 +13,15 @@ namespace MVCAssignmentPerson.Controllers
     public class PeopleController : Controller
     {
         IPeopleService _peopleService;
-        private readonly IPersonLanguageRepo _personLanguageRepo;// Byt ut mot Service
+        
         private readonly ILanguageService _languageService;
+        private readonly IPersonLanguageService _personLanguageService;
 
-        public PeopleController(IPeopleService peopleService, IPersonLanguageRepo personLanguageRepo , ILanguageService languageService)//Constructor injection 
+        public PeopleController(IPeopleService peopleService, ILanguageService languageService,IPersonLanguageService personLanguageService)//Constructor injection 
         {
             _peopleService = peopleService;
-           _personLanguageRepo = personLanguageRepo;//byt ut mot Service
             _languageService = languageService;
+            _personLanguageService = personLanguageService;
         }
 
 
@@ -40,7 +41,6 @@ namespace MVCAssignmentPerson.Controllers
 
         }
        
-
 
         [HttpPost]
         public IActionResult Create(PeopleViewModel createPerson)
@@ -82,7 +82,7 @@ namespace MVCAssignmentPerson.Controllers
             }
 
 
-            PersonLanguage personLanguage = _personLanguageRepo.Create(// Ändra till Service
+            PersonLanguage personLanguage = _personLanguageService.Add(// Ändra till Service
                 new PersonLanguage() { PersonId = personId, LanguageId = langId });
 
 
@@ -103,7 +103,7 @@ namespace MVCAssignmentPerson.Controllers
             }
 
 
-           _personLanguageRepo.Delete(personId,langId );
+          _personLanguageService.Delete(personId,langId );
 
 
 

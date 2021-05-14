@@ -6,16 +6,26 @@
 <h1>Manage Person Languages</h1>
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-3">
+        <h4>Person</h4>
+    </div>
+    <div class="col-3">
         <h4>Current</h4>
     </div>
-    <div class="col-6">
+    <div class="col-3">
         <h4>Avalible</h4>
+    </div>
+    <div class="col-3">
+        <h4>Return</h4>
     </div>
 
 </div>
 <div class="row">
-    <div class="col-6">
+    <div class="col-3">
+      <h4>@Model.Person.Name</h4>
+
+    </div>
+    <div class="col-3">
         <ul>
             @foreach (var item in Model.Person.PersonLanguages)
             {
@@ -24,7 +34,7 @@
             }
         </ul>
     </div>
-    <div class="col-6">
+    <div class="col-3">
         <ul>
             @foreach (var item in Model.Languages)
             {
@@ -33,6 +43,10 @@
                 </li>
             }
         </ul>
+    </div>
+    <div class="col-3">
+        <a asp-action="Index">Back to Person</a>
+
     </div>
 
 </div>
