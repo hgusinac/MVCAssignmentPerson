@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,11 @@ namespace MVCAssignmentPerson
             //Connection to Database
             services.AddDbContext<PeopleDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));//Nr 5
+
+            //--------------------------Identity-----------------------------------
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                     .AddEntityFrameworkStores<PeopleDbContext>()
+                     .AddDefaultTokenProviders();
 
 
             //Services IoC
@@ -73,7 +79,8 @@ namespace MVCAssignmentPerson
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();//  Add this-- Are you login ?
+            app.UseAuthorization();//  Add this too -do you have the right to do it ?
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MVCAssignmentPerson.Models.Data;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Database
 {
-    public class PeopleDbContext : DbContext
+    public class PeopleDbContext : IdentityDbContext<IdentityUser>
     {
         public PeopleDbContext(DbContextOptions<PeopleDbContext> options) : base(options)
         { }
@@ -15,6 +17,8 @@ namespace MVCAssignmentPerson.Database
         // Join table Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); //Recommend on the first line inside method.
+
             modelBuilder.Entity<PersonLanguage>().HasKey(pl =>
             new
             {
