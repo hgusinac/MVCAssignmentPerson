@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MVCAssignmentPerson.Database;
 using MVCAssignmentPerson.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace MVCAssignmentPerson.Controllers
 
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) // Constructor Injection
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) // Constructor Injection
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,13 +38,16 @@ namespace MVCAssignmentPerson.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user = new IdentityUser()
+                AppUser user = new AppUser()
                 {
 
                     UserName = userReg.UserName,
                     Email = userReg.Email,
-                    PhoneNumber = userReg.Phone
-                    //Ska man lägga till Namn efternaman och datum här ? ?
+                    PhoneNumber = userReg.Phone,
+                    FirstName = userReg.FirstName,
+                    LastName = userReg.LastName,
+                    BirthDate = userReg.BirthDate
+                  
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(user, userReg.Password);

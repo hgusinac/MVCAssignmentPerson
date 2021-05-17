@@ -70,15 +70,16 @@ namespace MVCAssignmentPerson.Database
             OriginalPerson.Phone = person.Phone;
             OriginalPerson.InCityId = person.InCityId;
 
-            int result = _peopleDbContext.SaveChanges();
+            int result = _peopleDbContext.SaveChanges(); // PROBLEM 
 
             if (result == 0)
             {
-                throw new Exception("Unable to add a Person to database");
+
+                return null; // PROBLEM
             }
 
 
-            return person;
+            return OriginalPerson;
         }
 
 

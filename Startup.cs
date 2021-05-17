@@ -34,7 +34,7 @@ namespace MVCAssignmentPerson
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));//Nr 5
 
             //--------------------------Identity-----------------------------------
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<AppUser, IdentityRole>()
                      .AddEntityFrameworkStores<PeopleDbContext>()
                      .AddDefaultTokenProviders();
 

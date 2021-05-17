@@ -77,7 +77,7 @@ namespace MVCAssignmentPerson.Models.Service
 
         public Person Edit(int id, CreatePersonViewModel createPerson)
         {
-            Person person = FindbyId(id);
+            Person person =  FindbyId(id);
 
             if(person == null)
             {
