@@ -8,7 +8,8 @@ namespace MVCAssignmentPerson.Models.ViewModel
 {
     public class EditPerson
     {
-        
+        public List<City> Citylist { get; set; }
+
 
         public int Id {set; get;}
 
@@ -25,6 +26,7 @@ namespace MVCAssignmentPerson.Models.ViewModel
             Id = id;
             this.CreatePerson = createPerson;
         }
+
 
         
     }

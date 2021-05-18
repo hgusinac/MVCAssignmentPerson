@@ -16,12 +16,15 @@ namespace MVCAssignmentPerson.Controllers
         
         private readonly ILanguageService _languageService;
         private readonly IPersonLanguageService _personLanguageService;
+        private readonly ICityService _cityService;
 
-        public PeopleController(IPeopleService peopleService, ILanguageService languageService,IPersonLanguageService personLanguageService)//Constructor injection 
+
+        public PeopleController(IPeopleService peopleService, ILanguageService languageService,IPersonLanguageService personLanguageService,ICityService cityService)//Constructor injection 
         {
             _peopleService = peopleService;
             _languageService = languageService;
             _personLanguageService = personLanguageService;
+            _cityService = cityService;
         }
 
 
@@ -124,6 +127,8 @@ namespace MVCAssignmentPerson.Controllers
 
             EditPerson editPerson = new EditPerson(id, person);
 
+            editPerson.Citylist = _cityService.All(); // Hela listan av Citys
+
 
             return View(editPerson);
         }
@@ -144,6 +149,8 @@ namespace MVCAssignmentPerson.Controllers
                 return RedirectToAction(nameof(Index));
             }
             EditPerson editPerson = new EditPerson(id, createPerson);
+            editPerson.Citylist = _cityService.All();//
+
             return View(editPerson);
 
         }
