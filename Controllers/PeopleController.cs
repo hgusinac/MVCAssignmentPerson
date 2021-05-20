@@ -33,6 +33,9 @@ namespace MVCAssignmentPerson.Controllers
         {
             return View(_peopleService.All());
         }
+        
+
+
 
         [HttpPost]
         public IActionResult Index(PeopleViewModel searchViewModel)

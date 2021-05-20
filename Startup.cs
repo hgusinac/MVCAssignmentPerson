@@ -39,6 +39,12 @@ namespace MVCAssignmentPerson
                      .AddDefaultTokenProviders();
 
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
+
+
             //Services IoC
             services.AddScoped<IPeopleService, PeopleService>();
             services.AddScoped<ICityService, CityService>();
@@ -48,16 +54,16 @@ namespace MVCAssignmentPerson
             // Lägg till Service 
 
             //------Repo Ioc--------
-           
+
             services.AddScoped<IPeopleRepo, DatabasePeopleRepo>();//Nr 5 Ulf använder denna. 
             services.AddScoped<ICityRepo, DbCityRepo>();
             services.AddScoped<ICountryRepo, DbCountryRepo>();
             services.AddScoped<ILanguageRepo, DbLanguageRepo>();
             services.AddScoped<IPersonLanguageRepo, DbPersonLanguageRepo>();
-           
-            
 
-            
+
+
+
             services.AddMvc();
         }
 
@@ -70,8 +76,8 @@ namespace MVCAssignmentPerson
             }
             else
             {
-                
-               
+
+
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

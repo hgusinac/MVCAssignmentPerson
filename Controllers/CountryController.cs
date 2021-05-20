@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCAssignmentPerson.Models.Service;
 using MVCAssignmentPerson.Models.ViewModel;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Controllers
 {
+    [Authorize(Roles = "Admin, Boss")]
     public class CountryController : Controller
     {
         private readonly ICountryService _countryService;

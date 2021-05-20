@@ -1,0 +1,39 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "UserList";
+}
+
+<h1>UserList</h1>
+
+<table>
+    <thead>
+        <tr class="row">
+            <th class="col-2">UserName</th>
+            <th class="col-2">FirstName</th>
+            <th class="col-2">LastName</th>
+            <th class="col-2">BirthDate</th>
+            <th class="col-2">Failed</th>
+            <th class="col-2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+        <tr class="row">
+            <td class="col-2">@item.UserName</td>
+            <td class="col-2">@item.FirstName</td>
+            <td class="col-2">@item.LastName</td>
+            <td class="col-2">@item.BirthDate</td>
+            <td class="col-2">@item.AccessFailedCount</td>
+
+            <td>
+                <a asp-action="Details" asp-controller="Admin" asp-route-id="@item.Id">Details</a>
+            </td>
+          
+        </tr>
+
+        }
+
+    </tbody>
+</table>

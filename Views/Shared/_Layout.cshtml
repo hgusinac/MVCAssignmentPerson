@@ -28,37 +28,55 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Ajax" asp-action="Index">Ajax-People</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Languages" asp-action="Index">Language</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-
-
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated)// om du är inloggad.
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                            </li>
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Languages" asp-action="Index">Language</a>
+                                </li>
+                            }
                         }
-                        else
-                        {
+                               
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                            </li>
-                        }
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
 
 
-                    </ul>
+                                @if (User.Identity.IsAuthenticated)// om du är inloggad.
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin Zone</a>
+                                        </li>
+
+                                    }
+
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                    </li>
+                                }
+                                else
+                                {
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                    </li>
+                                }
+
+
+                            </ul>
                 </div>
             </div>
         </nav>

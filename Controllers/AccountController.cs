@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Controllers
 {
-
+    
 
     public class AccountController : Controller
     {
@@ -28,6 +28,13 @@ namespace MVCAssignmentPerson.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            return View();
+        } 
+        
+      
+        public IActionResult AccessDenied()
+        {
+
             return View();
         }
 
@@ -103,6 +110,8 @@ namespace MVCAssignmentPerson.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        
+       
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCAssignmentPerson.Models.Data;
 using MVCAssignmentPerson.Models.Repo;
 using MVCAssignmentPerson.Models.Service;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Controllers
 {
+    [Authorize(Roles = "Admin, Boss")]
     public class CityController : Controller
     {
         private readonly ICityService _cityService;

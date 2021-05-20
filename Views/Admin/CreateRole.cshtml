@@ -1,0 +1,21 @@
+﻿@model string  
+@{
+    ViewData["Title"] = "CreateRole";
+}
+
+<h1>CreateRole</h1>
+
+
+@if (ViewBag.ErrorMsg != null)
+{
+    <h4>@ViewBag.ErrorMsg</h4>
+}
+<form asp-action="CreateRole" asp-controller="Admin" method="post">
+
+    <lable for="roleName">Role Name:</lable>
+
+    <input type="text"  required id="roleName" name="roleName" min="3" value="@Model"/>
+
+    <button>Create</button>
+
+</form>
