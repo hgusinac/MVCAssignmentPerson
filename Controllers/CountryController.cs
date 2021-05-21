@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Controllers
 {
-    [Authorize(Roles = "Admin, Boss")]
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         private readonly ICountryService _countryService;

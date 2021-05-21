@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Controllers
 {
-    [Authorize(Roles = "Admin, Boss")]
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
         private readonly ICityService _cityService;

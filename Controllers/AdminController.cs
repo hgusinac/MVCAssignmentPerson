@@ -10,7 +10,7 @@ using MVCAssignmentPerson.Models.ViewModel;
 
 namespace MVCAssignmentPerson.Controllers
 {
-    [Authorize(Roles ="Admin")]//Är du inloggad så har du tillgång till detta ! 
+    [Authorize(Roles ="Admin")]//Är du inloggad och har rollen så har du tillgång till detta ! 
     public class AdminController : Controller
     {
         private readonly UserManager<AppUser> _AppUser;

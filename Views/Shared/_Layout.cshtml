@@ -18,19 +18,31 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ajax" asp-action="Index">Ajax-People</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)// om du är inloggad.
                         {
-                            if (User.IsInRole("Admin"))
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Languages" asp-action="Index">Language</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ajax" asp-action="Index">Ajax-People</a>
+                            </li>
+                        }
+
+                        @if (User.Identity.IsAuthenticated)// om du är inloggad.
+                        {
+                            if (User.IsInRole("Admin")) // Om du har rollen Admin
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City</a>
@@ -40,43 +52,35 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Languages" asp-action="Index">Language</a>
-                                </li>
+
                             }
                         }
-                               
 
+                        @if (User.Identity.IsAuthenticated)// om du är inloggad.
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin Zone</a>
                                 </li>
 
-
-                                @if (User.Identity.IsAuthenticated)// om du är inloggad.
-                                {
-                                    if (User.IsInRole("Admin"))
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin Zone</a>
-                                        </li>
-
-                                    }
+                            }
 
 
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                                    </li>
-                                }
-                                else
-                                {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
 
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                                    </li>
-                                }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
 
 
-                            </ul>
+                    </ul>
                 </div>
             </div>
         </nav>

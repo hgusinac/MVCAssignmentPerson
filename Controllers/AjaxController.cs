@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCAssignmentPerson.Models.Data;
 using MVCAssignmentPerson.Models.Service;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCAssignmentPerson.Controllers
 {
+    [Authorize]
     public class AjaxController : Controller
     {
         IPeopleService _peopleService;
