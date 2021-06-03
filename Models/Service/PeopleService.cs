@@ -101,5 +101,9 @@ namespace MVCAssignmentPerson.Models.Service
 
         }
 
+        public List<Person> AllPerson()
+        {
+            return _peopleRepo.ReadPerson();
+        }
     }
 }

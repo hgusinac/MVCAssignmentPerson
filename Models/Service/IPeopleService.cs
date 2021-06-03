@@ -15,8 +15,11 @@ namespace MVCAssignmentPerson.Models.Service
         //R
         public PeopleViewModel All();
 
+        public List<Person> AllPerson();
+
         public PeopleViewModel FindBy(PeopleViewModel search);
         public Person FindbyId(int id);
+        
         //U
         public Person Edit(int id, CreatePersonViewModel createPerson);
         //D

@@ -61,8 +61,26 @@ namespace MVCAssignmentPerson
             services.AddScoped<ILanguageRepo, DbLanguageRepo>();
             services.AddScoped<IPersonLanguageRepo, DbPersonLanguageRepo>();
 
+            //--------------------Cors-------------------------------
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ApiPolicy",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:3000")// utan (/) i slutet
+                                                          .AllowAnyHeader()
+                                                          .AllowAnyMethod();
+                                  });
+            });
 
 
+
+
+
+
+            //-------------------Swagger ----------------------------
+            services.AddSwaggerGen();
 
             services.AddMvc();
         }
@@ -82,8 +100,18 @@ namespace MVCAssignmentPerson
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            app.UseSwagger();
 
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Persons API V1");
+            });
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();//  Add this-- Are you login ?
             app.UseAuthorization();//  Add this too -do you have the right to do it ?

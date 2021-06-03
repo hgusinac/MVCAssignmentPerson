@@ -72,7 +72,10 @@ namespace MVCAssignmentPerson.Models.Data
             return PersonList.Remove(OriginalPerson);
 
         }
-        
-        
+
+        public List<Person> ReadPerson()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

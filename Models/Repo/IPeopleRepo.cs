@@ -15,6 +15,8 @@ namespace MVCAssignmentPerson.Models.Repo
 
         public List<Person> Read();
 
+        public List<Person> ReadPerson();
+
         public Person Read(int id);
 
         public Person Update(Person person);

@@ -105,5 +105,10 @@ namespace MVCAssignmentPerson.Database
 
             return true;
         }
+
+        public List<Person> ReadPerson()
+        {
+            return _peopleDbContext.People.ToList();
+        }
     }
 }
