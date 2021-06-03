@@ -39,10 +39,14 @@ namespace MVCAssignmentPerson.Controllers
         }
 
         [HttpGet("{id}")]
-        public Person Get(int id)
+        public ActionResult<Person> Get(int id)
         {
             Person person = _peopleService.FindbyId(id);
 
+            if (person == null)
+            {
+                return BadRequest();
+            }
 
             foreach (var pl in person.PersonLanguages) // stoppar från att gå tillbaka och loopa person. 
             {
@@ -50,19 +54,19 @@ namespace MVCAssignmentPerson.Controllers
                 pl.Language.PersonLanguages = null;
             }
 
-            
-            if (person.InCityId != null )
+
+            if (person.InCityId != null)
             {
                 person.InCity = _cityService.FindbyId((int)person.InCityId);
                 person.InCity.PersonsInCity = null;
 
-                if(person.InCity.Country != null)
+                if (person.InCity.Country != null)
                 {
                     person.InCity.Country.CityInCountry = null;
                 }
             }
 
-            
+
 
 
             return person;
@@ -70,39 +74,33 @@ namespace MVCAssignmentPerson.Controllers
         }
 
         [HttpPost]
-        public int Post([FromBody] CreatePersonViewModel newPerson)
+        public ActionResult<Person> Post([FromBody] CreatePersonViewModel newPerson)
         {
             if (!ModelState.IsValid)
             {
-                return Response.StatusCode = 400;
+                return BadRequest(newPerson);
             }
 
             Person person = _peopleService.Add(newPerson);
             if (person == null)
             {
-                return Response.StatusCode = 500;
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Response.StatusCode = 201;
+            return Created("", person);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            Person person = _peopleService.FindbyId(id);
-            if (person == null)
+            if (_peopleService.Remove(id))
             {
-                Response.StatusCode = 404;
-            }
-            else if (!_peopleService.Remove(id))
-            {
-
-                Response.StatusCode = 500;
+                Response.StatusCode = 200;
             }
             else
             {
-
-                Response.StatusCode = 200;
+                Response.StatusCode = 400;
             }
 
 
