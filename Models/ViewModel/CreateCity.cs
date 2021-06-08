@@ -16,5 +16,7 @@ namespace MVCAssignmentPerson.Models.ViewModel
         public int CountryId { get; set; }
 
         public List<Country> CountryList { get; set; }
+
+       
     }
 }

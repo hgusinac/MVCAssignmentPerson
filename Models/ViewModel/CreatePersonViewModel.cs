@@ -21,6 +21,10 @@ namespace MVCAssignmentPerson.Models.ViewModel
 
         public List<City> CityList { get; set; }
 
+        public CreatePersonViewModel()
+        {
+
+        }
         
 
 

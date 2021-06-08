@@ -21,13 +21,16 @@ namespace MVCAssignmentPerson.Controllers
         private readonly ILanguageService _languageService;
         private readonly IPersonLanguageService _personLanguageService;
         private readonly ICityService _cityService;
+        private readonly ICountryService _countryService;
 
-        public ApiController(IPeopleService peopleService, ILanguageService languageService, IPersonLanguageService personLanguageService, ICityService cityService)
+        public ApiController(IPeopleService peopleService, ILanguageService languageService, IPersonLanguageService personLanguageService,
+            ICityService cityService, ICountryService countryService)
         {
             _peopleService = peopleService;
             _languageService = languageService;
             _personLanguageService = personLanguageService;
             _cityService = cityService;
+            _countryService = countryService;
         }
 
 
@@ -36,6 +39,30 @@ namespace MVCAssignmentPerson.Controllers
         public ActionResult<IEnumerable<Person>> Get()
         {
             return Ok(_peopleService.AllPerson());
+        }
+
+        [HttpGet("/api/Cities")]
+        public ActionResult<City> GetCities()
+        {
+            List<City> city = _cityService.All();
+            foreach(var item in city)
+            {
+                item.Country = null;
+                item.PersonsInCity = null;
+
+            }
+            return Ok(city);
+        }
+
+        [HttpGet("/api/Countries")]
+        public ActionResult <Country> GetCountries()
+        {
+            List<Country> country = _countryService.All();
+            foreach (var item in country)
+            {
+                item.CityInCountry = null;
+            }
+            return Ok(country);
         }
 
         [HttpGet("{id}")]
@@ -106,6 +133,7 @@ namespace MVCAssignmentPerson.Controllers
 
 
         }
+        
 
     }
 }

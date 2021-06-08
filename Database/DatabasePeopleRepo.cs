@@ -16,7 +16,7 @@ namespace MVCAssignmentPerson.Database
 
         public DatabasePeopleRepo(PeopleDbContext peopleDbContext)
         {
-           _peopleDbContext = peopleDbContext;
+            _peopleDbContext = peopleDbContext;
         }
 
         public Person Create(CreatePersonViewModel createPerson)
@@ -27,8 +27,8 @@ namespace MVCAssignmentPerson.Database
                 person.InCityId = createPerson.CityId;
                 person.Phone = createPerson.Phone;
             }
-            
-                                      
+
+
 
             _peopleDbContext.Add(person);// lägger till person med rätt namn city phone.
 
@@ -38,22 +38,48 @@ namespace MVCAssignmentPerson.Database
             {
                 throw new Exception("Unable to add a Person to database");
             }
+
+
+            person = Read(person.Id);
+
+
             return person;
         }
 
 
 
-       
+
         public List<Person> Read()
         {
-            
             return _peopleDbContext.People.Include("InCity").ToList(); // Ändrat så att InCity följer med personen.
+
+
         }
         public Person Read(int id)
         {
-            return _peopleDbContext.People.Include(Person => Person.PersonLanguages)
+                              
+             Person person = _peopleDbContext.People.Include(Person => Person.PersonLanguages)
                                           .ThenInclude(perLan => perLan.Language)
+                                          .Include(Person => Person.InCity)
+                                          .ThenInclude(incity => incity.Country)
                                           .SingleOrDefault(row => row.Id == id);
+
+
+            if(person.InCity.Country != null)
+            {
+                person.InCity.Country.CityInCountry = null;
+            }
+
+
+            foreach (var pl in person.PersonLanguages) // stoppar från att gå tillbaka och loopa person. 
+            {
+                pl.Person = null;
+                pl.Language.PersonLanguages = null;
+            }
+
+            person.InCity.PersonsInCity = null;
+            return person;
+
         }
 
         public Person Update(Person person)
@@ -108,7 +134,19 @@ namespace MVCAssignmentPerson.Database
 
         public List<Person> ReadPerson()
         {
-            return _peopleDbContext.People.ToList();
+            List<Person> people = _peopleDbContext.People.Include(p => p.InCity).ToList();
+            foreach (var p in people)
+            {
+                p.InCity.PersonsInCity = null;
+
+                if (p.InCity.Country != null)
+                {
+                    p.InCity.Country.CityInCountry = null;
+                }
+
+            }
+
+            return people;
         }
     }
 }
